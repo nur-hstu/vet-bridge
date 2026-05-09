@@ -1,94 +1,615 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Business Name</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f7f7f7;
-      color: #222;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VET BRIDGE | Dr. Nur's Daily</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 60px 20px;
-      text-align: center;
-    }
+  :root {
+    --blue-primary: #1565C0;
+    --blue-bright: #1E88E5;
+    --blue-light: #E3F2FD;
+    --blue-dark: #0D47A1;
+    --navy: #0a1628;
+    --white: #ffffff;
+    --glass-bg: rgba(255,255,255,0.18);
+    --glass-border: rgba(255,255,255,0.35);
+    --text-dark: #0D1F3C;
+    --text-mid: #2c4a72;
+    --gray-soft: #f0f4f8;
+  }
 
-    .card {
-      background: white;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    }
+  html { scroll-behavior: smooth; }
 
-    h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
-    }
+  body {
+    font-family: 'Hind Siliguri', sans-serif;
+    background: #0a1e3d;
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-    p {
-      font-size: 18px;
-      line-height: 1.6;
-    }
+  /* ── Background ── */
+  .bg-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(21,101,192,0.45) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 85% 80%, rgba(30,136,229,0.3) 0%, transparent 55%),
+      linear-gradient(160deg, #071020 0%, #0d1f3c 50%, #0a1628 100%);
+  }
 
-    .button {
-      display: inline-block;
-      margin-top: 25px;
-      padding: 14px 28px;
-      background: #111;
-      color: white;
-      text-decoration: none;
-      border-radius: 30px;
-      font-weight: bold;
-    }
+  /* Play-triangle decorative elements */
+  .triangle {
+    position: fixed;
+    opacity: 0.08;
+    z-index: 0;
+  }
+  .triangle svg { display: block; }
+  .tri-1 { top: -40px; right: 60px; transform: rotate(-15deg); }
+  .tri-2 { bottom: 60px; left: -30px; transform: rotate(20deg); }
+  .tri-3 { top: 40%; right: -20px; transform: rotate(-8deg); }
 
-    .services {
-      margin-top: 35px;
-      display: grid;
-      gap: 15px;
-    }
+  /* ── Layout ── */
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
 
-    .service {
-      background: #f1f1f1;
-      padding: 15px;
-      border-radius: 12px;
-    }
+  /* ── Hero Section ── */
+  .hero {
+    padding: 52px 0 36px;
+    text-align: center;
+  }
 
-    footer {
-      margin-top: 40px;
-      font-size: 14px;
-      color: #666;
-    }
-  </style>
+  .logo-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 8px;
+  }
+
+  .play-icon {
+    display: flex;
+    gap: 4px;
+    margin-right: 10px;
+  }
+
+  .play-icon .tri {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 9px 0 9px 16px;
+    border-color: transparent transparent transparent var(--blue-bright);
+  }
+  .play-icon .tri:nth-child(2) {
+    border-color: transparent transparent transparent #5aabff;
+    margin-top: 3px;
+  }
+
+  .brand-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(28px, 7vw, 42px);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    line-height: 1;
+  }
+  .brand-name .nur { color: var(--blue-bright); }
+  .brand-name .daily { color: var(--white); }
+
+  .brand-sub {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  .vet-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    background: rgba(30,136,229,0.2);
+    border: 1px solid rgba(30,136,229,0.4);
+    border-radius: 100px;
+    padding: 6px 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #7ec8ff;
+    text-transform: uppercase;
+  }
+  .vet-badge::before {
+    content: '';
+    display: block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #5aabff;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+
+  .tagline {
+    margin-top: 16px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+  }
+
+  /* ── Glass Card ── */
+  .glass-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 28px 28px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  }
+
+  /* ── Doctor Profile ── */
+  .profile-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .avatar {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue-primary), #42a5f5);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px; font-weight: 900;
+    color: white;
+    flex-shrink: 0;
+    border: 2px solid rgba(255,255,255,0.25);
+  }
+
+  .profile-info h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .profile-info .degree {
+    font-size: 13px;
+    color: #7ec8ff;
+    margin-bottom: 2px;
+  }
+  .profile-info .reg {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, rgba(30,136,229,0.6), rgba(255,255,255,0.1), transparent);
+    margin: 16px 0;
+  }
+
+  /* ── Welcome text ── */
+  .welcome-text {
+    font-size: 15px;
+    line-height: 1.85;
+    color: rgba(255,255,255,0.75);
+  }
+  .highlight {
+    color: #7ec8ff;
+    font-weight: 600;
+  }
+
+  /* ── Section heading ── */
+  .section-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .section-heading .bar {
+    width: 4px; height: 22px;
+    background: var(--blue-bright);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .section-heading h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+
+  /* ── Services ── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .service-item {
+    background: rgba(30,136,229,0.1);
+    border: 1px solid rgba(30,136,229,0.25);
+    border-radius: 12px;
+    padding: 14px 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .service-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: rgba(30,136,229,0.25);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .service-icon svg { width: 16px; height: 16px; stroke: #7ec8ff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  .service-text {
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  /* ── Contact ── */
+  .contact-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .contact-row:last-child { border-bottom: none; }
+
+  .contact-icon {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: var(--blue-primary);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .contact-icon svg { width: 18px; height: 18px; stroke: white; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  .contact-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 3px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+  }
+  .contact-value {
+    font-size: 15px;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.5;
+  }
+  .contact-value a {
+    color: #7ec8ff;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  /* ── Social ── */
+  .social-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .social-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.04);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .social-item:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.25);
+  }
+
+  .social-dot {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 17px;
+  }
+  .yt { background: #FF0000; }
+  .fb { background: #1877F2; }
+  .ig { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); }
+
+  .social-handle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+  }
+  .social-platform {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 1px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 32px 0 20px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+  }
+  .footer .footer-brand {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+
+  /* ── Animations ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.65s ease forwards;
+  }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up:nth-child(1) { animation-delay: 0.1s; }
+  .fade-up:nth-child(2) { animation-delay: 0.2s; }
+  .fade-up:nth-child(3) { animation-delay: 0.3s; }
+  .fade-up:nth-child(4) { animation-delay: 0.4s; }
+  .fade-up:nth-child(5) { animation-delay: 0.5s; }
+
+  .phone-link {
+    color: #7ec8ff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+  }
+
+  @media (max-width: 480px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .glass-card { padding: 20px 18px; }
+    .profile-header { gap: 14px; }
+    .profile-info h2 { font-size: 18px; }
+  }
+</style>
 </head>
 <body>
 
-  <div class="container">
-    <div class="card">
-      <h1>Your Business Name</h1>
-      <p>
-        A short sentence about what you do. For example:
-        We help customers with high-quality services at affordable prices.
-      </p>
+<!-- Background -->
+<div class="bg-layer"></div>
 
-      <div class="services">
-        <div class="service">Service 1</div>
-        <div class="service">Service 2</div>
-        <div class="service">Service 3</div>
+<!-- Decorative triangles (brand motif) -->
+<div class="triangle tri-1">
+  <svg width="200" height="200" viewBox="0 0 100 100"><polygon points="50,0 100,100 0,100" fill="white"/></svg>
+</div>
+<div class="triangle tri-2">
+  <svg width="160" height="160" viewBox="0 0 100 100"><polygon points="50,0 100,100 0,100" fill="white"/></svg>
+</div>
+<div class="triangle tri-3">
+  <svg width="120" height="120" viewBox="0 0 100 100"><polygon points="50,0 100,100 0,100" fill="white"/></svg>
+</div>
+
+<div class="container">
+
+  <!-- Hero -->
+  <header class="hero fade-up">
+    <div class="logo-mark">
+      <div class="play-icon">
+        <div class="tri"></div>
+        <div class="tri"></div>
+      </div>
+      <div class="brand-name">
+        <span class="nur">Dr. Nur's</span> <span class="daily">Daily</span>
+      </div>
+    </div>
+    <div class="brand-sub">Happy Farming</div>
+    <div class="vet-badge">VET BRIDGE</div>
+    <p class="tagline">খামারের সকল সমস্যার সহজ সমাধান</p>
+  </header>
+
+  <!-- Doctor Profile -->
+  <div class="glass-card fade-up">
+    <div class="profile-header">
+      <div class="avatar">ডা</div>
+      <div class="profile-info">
+        <h2>ডা. নুর আহমেদ</h2>
+        <div class="degree">ডি.ভি.এম. (হাবিপ্রবি) · ভেটেরিনারি কনসালট্যান্ট</div>
+        <div class="reg">বিডিভিএস রেজি. নং ৮৮৪৭ · পোল্ট্রি ও পেট প্রাণী চিকিৎসক</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <p class="welcome-text">
+      আসসালামু আলাইকুম। <span class="highlight">Dr. Nur's Daily</span>-তে আপনাকে স্বাগতম।
+      <span class="highlight">VET BRIDGE</span> মূলত Dr. Nur's Daily-এর একটি অঙ্গপ্রতিষ্ঠান।<br><br>
+      দীর্ঘদিন ধরে পোল্ট্রি, পোষা প্রাণী এবং খামার ব্যবস্থাপনা নিয়ে কাজ করছি।
+      আমি কোনো কোম্পানির অধীনে চাকরিরত নই — তাই খামারে খামারে ভিজিট তুলনামূলক বেশি এবং
+      সরাসরি মাঠ পর্যায়ে কাজ করার সুযোগ বেশি হয়।
+      আমি সবসময় খামারিদের <span class="highlight">বাস্তবসম্মত ও কার্যকর</span> পরামর্শ দেওয়ার চেষ্টা করি,
+      যেন কম খরচে ভালো ফলাফল পাওয়া যায়।
+    </p>
+  </div>
+
+  <!-- Services -->
+  <div class="glass-card fade-up">
+    <div class="section-heading">
+      <div class="bar"></div>
+      <h3>আমাদের সেবাসমূহ</h3>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-item">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+        </div>
+        <div class="service-text">পোল্ট্রি রোগ নির্ণয় ও চিকিৎসা</div>
       </div>
 
-      <a class="button" href="https://wa.me/1234567890">Contact on WhatsApp</a>
+      <div class="service-item">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="service-text">খামার ব্যবস্থাপনা পরামর্শ</div>
+      </div>
 
-      <footer>
-        © 2026 Your Business Name. All rights reserved.
-      </footer>
+      <div class="service-item">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="service-text">পোষা প্রাণীর চিকিৎসা ও পরিচর্যা</div>
+      </div>
+
+      <div class="service-item">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="service-text">খাদ্য ও পুষ্টি বিষয়ক পরামর্শ</div>
+      </div>
+
+      <div class="service-item" style="grid-column: 1 / -1;">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="service-text">রোগ প্রতিরোধ ও বায়োসিকিউরিটি গাইডলাইন</div>
+      </div>
+
     </div>
   </div>
 
+  <!-- Contact -->
+  <div class="glass-card fade-up">
+    <div class="section-heading">
+      <div class="bar"></div>
+      <h3>যোগাযোগ</h3>
+    </div>
+
+    <div class="contact-row">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.9 12 19.79 19.79 0 0 1 1.83 3.43 2 2 0 0 1 3.8 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div>
+        <div class="contact-label">মোবাইল</div>
+        <div class="contact-value">
+          <a class="phone-link" href="tel:+8801303198992">০১৩০৩ ১৯৮ ৯৯২</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-row">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <div>
+        <div class="contact-label">চেম্বারের ঠিকানা</div>
+        <div class="contact-value">ঘাটাইল উপজেলা পরিষদের পেছন পার্শ্বে,<br>খরাবর রোড, ঘাটাইল সদর, টাঙ্গাইল।</div>
+      </div>
+    </div>
+
+    <div class="contact-row">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </div>
+      <div>
+        <div class="contact-label">ফেইসবুক পেইজ</div>
+        <div class="contact-value">
+          <a href="https://www.facebook.com/DrNursDaily" target="_blank" rel="noopener" style="color:#7ec8ff;font-weight:600;text-decoration:none;">Dr. Nur's Daily</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Social Media -->
+  <div class="glass-card fade-up">
+    <div class="section-heading">
+      <div class="bar"></div>
+      <h3>সোশ্যাল মিডিয়া</h3>
+    </div>
+    <div class="social-row">
+
+      <a class="social-item" href="https://youtube.com/@DrNurAhmed" target="_blank" rel="noopener">
+        <div class="social-dot yt">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58a2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12z"/></svg>
+        </div>
+        <div>
+          <div class="social-handle">@DrNurAhmed</div>
+          <div class="social-platform">YouTube</div>
+        </div>
+      </a>
+
+      <a class="social-item" href="https://facebook.com/DrNurAhmed" target="_blank" rel="noopener">
+        <div class="social-dot fb">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </div>
+        <div>
+          <div class="social-handle">@DrNurAhmed</div>
+          <div class="social-platform">Facebook</div>
+        </div>
+      </a>
+
+      <a class="social-item" href="https://instagram.com/DrNurAhmed" target="_blank" rel="noopener">
+        <div class="social-dot ig">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </div>
+        <div>
+          <div class="social-handle">@DrNurAhmed</div>
+          <div class="social-platform">Instagram</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer fade-up">
+    <span class="footer-brand">Dr. Nur's Daily · VET BRIDGE</span>
+    আপনার খামার ও প্রিয় প্রাণীর সুস্থতাই আমাদের লক্ষ্য।
+  </footer>
+
+</div>
 </body>
 </html>
